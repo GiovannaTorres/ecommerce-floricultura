@@ -14,7 +14,9 @@ public interface PlantaRepository extends JpaRepository <Planta, Long> {
 	public List<Planta> findAllByNomeContainingIgnoreCase(String nome);
 	
 	public List<Planta> findAllByEspecieContainingIgnoreCase(String especie);
+
+	public List<Planta> findByValor(BigDecimal valor);
 	
-	public List<Planta> findAllByValorContaining(BigDecimal valor);
+	public List<Planta> findByValorLessThanEqual(BigDecimal valor);
 
 }

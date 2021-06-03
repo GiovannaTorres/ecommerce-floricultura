@@ -1,5 +1,6 @@
 package com.generation.floricultura.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,20 @@ public class PlantaController {
 		return repository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
 										.orElse(ResponseEntity.notFound().build());
 	}
+	@GetMapping("/especie/{especie}")
+	public ResponseEntity <List<Planta>> getByEspecie(@PathVariable String especie){
+		return ResponseEntity.ok(repository.findAllByEspecieContainingIgnoreCase(especie));
+	}
+	
+	@GetMapping("/valor/{valor}")
+	public ResponseEntity <List<Planta>> getByValor(@PathVariable BigDecimal valor){
+		return ResponseEntity.ok(repository.findByValor(valor));
+	}
+	
+	@GetMapping("/valor/<{valor}")
+	public ResponseEntity <List<Planta>> getByValorLessThanEqual(@PathVariable BigDecimal valor){
+		return ResponseEntity.ok(repository.findByValorLessThanEqual(valor));
+	}	
 	
 	@PostMapping
 	public ResponseEntity<Planta> post (@RequestBody Planta plantinha){
